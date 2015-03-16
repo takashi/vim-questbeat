@@ -1,13 +1,11 @@
-# vim-sonots
+# vim-questbeat
 
-そのっつ
-
-![](http://go-gyazo.appspot.com/83f73c849024294e.png)
+くえび
 
 ## Usage
 
 ```
-:Sonots
+:Questbeat
 ```
 
 ## Requirements
@@ -20,8 +18,12 @@ put this plugin into your bundle directory
 
 ## License
 
-Sonots Public License
+Questbeat Public License
 
 ## Author
+
+Takashi Nakagawa
+
+## Original Author
 
 Yasuhiro Matsumoto (a.k.a mattn)

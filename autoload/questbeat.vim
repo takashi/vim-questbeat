@@ -9,7 +9,7 @@ function! s:gui2cui(rgb)
   return rgb[0] + rgb[1] + rgb[2]
 endfunction
 
-function! sonots#render()
+function! questbeat#render()
   let rgbfile = $VIMRUNTIME . '/rgb.txt'
   let coltable = {}
   if filereadable(rgbfile)
@@ -19,7 +19,7 @@ function! sonots#render()
   endif
   let coltable['None'] = 'NONE'
 
-  let lines = readfile(s:data_dir . '/sonots.xpm')
+  let lines = readfile(s:data_dir . '/questbeat.xpm')
   let pos1 = index(lines, '/* columns rows colors chars-per-pixel */')
   let pos2 = index(lines, '/* pixels */')
   let colors = []
@@ -29,11 +29,11 @@ function! sonots#render()
       let s[1] = coltable[s[1]]
     endif
     if s[1] == 'NONE'
-      call add(colors, printf('syntax match sonotsNONE /%s/', join(map(split(s[0], '\zs'), 'printf("[\\x%02x]",char2nr(v:val))'), '')))
-      highlight sonotsNONE guifg=bg guibg=NONE ctermfg=NONE ctermbg=NONE
+      call add(colors, printf('syntax match questbeatNONE /%s/', join(map(split(s[0], '\zs'), 'printf("[\\x%02x]",char2nr(v:val))'), '')))
+      highlight questbeatNONE guifg=bg guibg=NONE ctermfg=NONE ctermbg=NONE
     else
-      call add(colors, printf('syntax match sonots%s /%s/ contains=sonotsNONE', s[1][1:], join(map(split(s[0], '\zs'), 'printf("[\\x%02x]",char2nr(v:val))'), '')))
-      exe printf("highlight sonots%s guifg='%s' guibg='%s' ctermfg=%d ctermbg=%d", s[1][1:], s[1], s[1], s:gui2cui(s[1]), s:gui2cui(s[1]))
+      call add(colors, printf('syntax match questbeat%s /%s/ contains=questbeatNONE', s[1][1:], join(map(split(s[0], '\zs'), 'printf("[\\x%02x]",char2nr(v:val))'), '')))
+      exe printf("highlight questbeat%s guifg='%s' guibg='%s' ctermfg=%d ctermbg=%d", s[1][1:], s[1], s[1], s:gui2cui(s[1]), s:gui2cui(s[1]))
     endif
   endfor
   let image = {
@@ -41,7 +41,7 @@ function! sonots#render()
   \ "data" : map(lines[pos2+1 :], 'matchstr(v:val, ''^"\zs.\+\ze",\?$'')')
   \}
 
-  silent edit `='==SONOTS=='`
+  silent edit `='==QUESTBEAT=='`
   silent normal! gg0
   silent only!
   setlocal buftype=nowrite
